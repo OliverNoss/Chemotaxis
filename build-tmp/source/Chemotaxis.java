@@ -18,7 +18,7 @@ public class Chemotaxis extends PApplet {
 // check target in searchWalk()
 int n; 
 Bacteria[] a = new Bacteria[20];
-Food[] techSustinance = new Food[12];
+Food[] techSustinance = new Food[10];
 
 public void setup()   
 {     
@@ -34,7 +34,7 @@ public void setup()
 	size(500,500);
 	background(0);
 	noStroke();
-	frameRate(10);
+	frameRate(15);
 }   
 
 public void draw()   
@@ -64,7 +64,7 @@ class Bacteria
 	int target;
 	int rgb;
 	int x, y; 
-	int d;
+	float d;
 	Bacteria()
 	{
 
@@ -84,11 +84,9 @@ class Bacteria
 		fill(rgb); 		
 		ellipse(x, y, PApplet.parseInt(d), PApplet.parseInt(d));
 		//shrink
-		d*=.99999997f;
-		// d*=.99999997;
-		// d*=.99999997;
-		// d*=.99999997;
-		if(d<=2)
+		d*=.95f;
+		
+		if(d<2)
 		{
 			x = (int)(Math.random()*499+1);
 			y = (int)(Math.random()*499+1);

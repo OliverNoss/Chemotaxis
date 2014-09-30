@@ -2,7 +2,7 @@
 // check target in searchWalk()
 int n; 
 Bacteria[] a = new Bacteria[20];
-Food[] techSustinance = new Food[12];
+Food[] techSustinance = new Food[10];
 
 void setup()   
 {     
@@ -18,7 +18,7 @@ void setup()
 	size(500,500);
 	background(0);
 	noStroke();
-	frameRate(10);
+	frameRate(15);
 }   
 
 void draw()   
@@ -48,7 +48,7 @@ class Bacteria
 	int target;
 	color rgb;
 	int x, y; 
-	int d;
+	float d;
 	Bacteria()
 	{
 
@@ -68,11 +68,9 @@ class Bacteria
 		fill(rgb); 		
 		ellipse(x, y, int(d), int(d));
 		//shrink
-		d*=.99999997;
-		// d*=.99999997;
-		// d*=.99999997;
-		// d*=.99999997;
-		if(d<=2)
+		d*=.95;
+		
+		if(d<2)
 		{
 			x = (int)(Math.random()*499+1);
 			y = (int)(Math.random()*499+1);
