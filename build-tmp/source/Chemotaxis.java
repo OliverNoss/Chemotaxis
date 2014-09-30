@@ -1,10 +1,26 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Chemotaxis extends PApplet {
+
 // Oliver Noss AP Computer Science
 // check target in searchWalk()
 int n; 
 Bacteria[] a = new Bacteria[20];
 Food[] techSustinance = new Food[12];
 
-void setup()   
+public void setup()   
 {     
 	
 	for (int i = 0; i < techSustinance.length; i++) 
@@ -21,7 +37,7 @@ void setup()
 	frameRate(10);
 }   
 
-void draw()   
+public void draw()   
 {  
 	n=0;
 	background(0);
@@ -46,7 +62,7 @@ class Bacteria
 {   
 	float[] distList;
 	int target;
-	color rgb;
+	int rgb;
 	int x, y; 
 	int d;
 	Bacteria()
@@ -63,12 +79,12 @@ class Bacteria
 
 		d = 20;
 	}
-	void show()
+	public void show()
 	{
 		fill(rgb); 		
-		ellipse(x, y, int(d), int(d));
+		ellipse(x, y, PApplet.parseInt(d), PApplet.parseInt(d));
 		//shrink
-		d*=.99999997;
+		d*=.99999997f;
 		// d*=.99999997;
 		// d*=.99999997;
 		// d*=.99999997;
@@ -80,14 +96,14 @@ class Bacteria
 			d=20;
 		}
 	}
-	void wrapCheck()
+	public void wrapCheck()
 	{
 		if (x < 0){x = 500;}
 		if (x > 500){x = 0;}
 		if (y < 0){y = 500;}
 		if (y > 500){y = 0;}
 	}
-	void searchWalk()
+	public void searchWalk()
 	{	
 		for (int i = 0; i < techSustinance.length; i++) 
 		{
@@ -138,23 +154,32 @@ class Food
 {
 
 	int x, y;
-	color rgb;
+	int rgb;
 	Food()
 	{
 		x = (int)(Math.random()*499+1);
 		y = (int)(Math.random()*499+1);
 		rgb = color((int)(Math.random()*50+205),(int)(Math.random()*100),(int)(Math.random()*30));
 	}
-	void show()
+	public void show()
 	{
 		fill(rgb);
 		ellipse(x,y,5,5);
 
 	}
-	void eaten()
+	public void eaten()
 	{
 		x = (int)(Math.random()*499+1);
 		y = (int)(Math.random()*499+1);
 		rgb = color((int)(Math.random()*50+205),(int)(Math.random()*100),(int)(Math.random()*30));
 	}
+}
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "Chemotaxis" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
 }
